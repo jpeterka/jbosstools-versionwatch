@@ -16,6 +16,16 @@ public class Bundle {
 	Installation installation;
 	boolean bumped = false;
 
+    public boolean isDecreased() {
+        return decreased;
+    }
+
+    public void setDecreased() {
+        this.decreased = true;
+    }
+
+    private boolean decreased = false;
+
 	public Installation getInstallation() {
 		return installation;
 	}
@@ -123,4 +133,6 @@ public class Bundle {
 	public boolean getBumped() {
 		return bumped;
 	}
+
+
 }

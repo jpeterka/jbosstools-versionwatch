@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.jboss.tools.vwatch.Settings;
 import org.jboss.tools.vwatch.VWatch;
+import org.jboss.tools.vwatch.issue.MultipleVersionIssue;
 import org.jboss.tools.vwatch.model.Bundle;
 import org.jboss.tools.vwatch.model.Installation;
 import org.jboss.tools.vwatch.model.Issue;
@@ -219,7 +220,25 @@ public class BundleVersionReport extends Report {
 		if (b.getBumped()) {
 			String relPath = ReportService.getInstance().getBumpIcoPath();
 			ret = "<img src=\"" + relPath + "\"/>";
+            //ret = "<span class=\"ok-icon\">&uarr;</span>";
+            //ret = "abc";
 		}
+        else if (b.isDecreased()) {
+            String relPath = ReportService.getInstance().getDecIcoPath();
+            ret = "<img src=\"" + relPath + "\"/>";
+        }
+        else {
+            boolean check = true;
+            for (Issue i : b.getIssues() ) {
+                if (i instanceof MultipleVersionIssue) {
+                    check = false;
+                }
+            }
+            if (check) {
+                String relPath = ReportService.getInstance().getSameIcoPath();
+                ret = "<img src=\"" + relPath + "\"/>";
+            }
+        }
 		return ret;
 	}
 

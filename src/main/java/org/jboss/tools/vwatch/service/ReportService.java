@@ -22,7 +22,7 @@ public class ReportService {
 
 	private static ReportService instance = null;
 	private String cssContent;
-	private String bumpIcoPath;
+	private String bumpIcoPath,decIcoPath,sameIcoPath;
 
 	public static ReportService getInstance() {
 		if (instance == null) {
@@ -52,6 +52,9 @@ public class ReportService {
 	public void generateReport(List<Installation> installations) {
 		try {
 			bumpIcoPath = FileService.getInstance().ExportResource("/bumped.png");
+            sameIcoPath = FileService.getInstance().ExportResource("/same.png");
+            decIcoPath = FileService.getInstance().ExportResource("/decreased.png");
+
 			String cssPath = FileService.getInstance().ExportResource("/vwstyle.css");
 			cssContent = CSSReader.readCSSFile(cssPath);
 		} catch (Exception e) {
@@ -84,5 +87,17 @@ public class ReportService {
 		String relPath = FileService.getInstance().getRelPath(new File(System.getProperty("user.dir")).getAbsolutePath(), bumpIcoPath);
 		return  relPath;
 	}
+
+    public String getDecIcoPath() {
+        String relPath = FileService.getInstance().getRelPath(new File(System.getProperty("user.dir")).getAbsolutePath(), decIcoPath);
+        return  relPath;
+    }
+
+    public String getSameIcoPath() {
+        String relPath = FileService.getInstance().getRelPath(new File(System.getProperty("user.dir")).getAbsolutePath(), sameIcoPath);
+        return  relPath;
+    }
+
+
 
 }

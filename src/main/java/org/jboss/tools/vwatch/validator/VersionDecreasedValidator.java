@@ -14,8 +14,10 @@ public class VersionDecreasedValidator extends PairValidator {
 		setIssueMessage("Version must be higher or at least equal");
 		boolean ret = vs.isVersionGreaterOrEqual(b1.getVersion(),
 				b2.getVersion());
-		if (!ret)
-			log.error("ERROR - Version must be higher or equal to it's predecessor");
+		if (!ret) {
+            b2.setDecreased();
+            log.error("ERROR - Version must be higher or equal to it's predecessor");
+        }
 		return ret;
 	}
 
